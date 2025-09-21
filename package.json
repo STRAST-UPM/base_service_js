@@ -1,0 +1,19 @@
+{
+  "name": "base_service_js",
+  "version": "1.0.0",
+  "description": "base web service in javascript",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/STRAST-UPM/base_service_js.git"
+  },
+  "author": "hugopascual",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/STRAST-UPM/base_service_js/issues"
+  },
+  "homepage": "https://github.com/STRAST-UPM/base_service_js#readme"
+}
