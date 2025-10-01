@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "base web service in javascript",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node src/index.js"
   },
