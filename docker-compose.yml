@@ -1,0 +1,13 @@
+services:
+  web:
+    image: ghcr.io/strast-upm/base_service_js:latest
+    ports:
+      - "30080:8080"
+    env_file:
+      - .env
+    environment:
+      - PORT=${PORT}
+
+networks:
+  default:
+    driver: bridge

@@ -1,22 +1,18 @@
 # Use the official lightweight Node.js image.
-FROM node:20-slim
+FROM node:lts-bookworm-slim
 
 # Create and change to the app directory.
 WORKDIR /usr/src/app
 
-# Copy application dependency manifests to the container image.
+# Copy package files first for better caching
 COPY package*.json ./
 
-# Install dependencies.
-# If you add package-lock.json, use npm ci instead.
+# Install dependencies
 RUN npm install
 
-# Copy local code to the container image.
-COPY . .
+# Copy application code
+COPY ./code/src ./code/src
 
-# Service must listen to $PORT environment variable.
-# This default value facilitates local development.
-ENV PORT=8080
-
-# Run the web service on container startup.
-CMD [ "npm", "start" ]
+# Keep container running for inspection
+# CMD ["sleep", "infinity"]
+CMD ["npm", "start"]
