@@ -6,7 +6,8 @@ services:
     env_file:
       - .env
     environment:
-      - PORT=${PORT}
+      - PORT=${PORT:-8080}
+      - REGION=${REGION:-unknown}
 
 networks:
   default:
