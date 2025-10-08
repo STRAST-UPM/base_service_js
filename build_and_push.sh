@@ -18,7 +18,7 @@ fi
 tags=("$@")
 
 # Build images without cache to be fully updated
-sudo docker build --no-cache --force-rm -t "$image_name:${tags[0]}" "$script_parent_folder"
+docker build --no-cache --force-rm -t "$image_name:${tags[0]}" "$script_parent_folder"
 
 echo "Creating tags and pushing..."
 # Create all tags and push to registry
@@ -26,16 +26,16 @@ for tag in "${tags[@]}"; do
 
     # Create additional tag if not the first one
     if [ "$tag" != "${tags[0]}" ]; then
-        sudo docker tag "$image_name:${tags[0]}" "$image_name:$tag"
+        docker tag "$image_name:${tags[0]}" "$image_name:$tag"
     fi
 
     # Tag for registry and push
-    sudo docker tag "$image_name:$tag" "$image_repository/$image_name:$tag"
-    sudo docker push "$image_repository/$image_name:$tag"
+    docker tag "$image_name:$tag" "$image_repository/$image_name:$tag"
+    docker push "$image_repository/$image_name:$tag"
 done
 
 echo "Cleaning dangling images..."
-sudo docker image prune -f
+docker image prune -f
 
 echo "Complete! Available tags:"
 for tag in "${tags[@]}"; do

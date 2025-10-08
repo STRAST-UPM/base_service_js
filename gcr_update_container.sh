@@ -31,7 +31,7 @@ gcloud auth configure-docker gcr.io --quiet
 
 # === BUILD ===
 echo "Construyendo imagen local..."
-sudo docker build --no-cache --force-rm -t "$image_name:${tags[0]}" "$script_parent_folder"
+docker build --no-cache --force-rm -t "$image_name:${tags[0]}" "$script_parent_folder"
 
 # === PUSH ===
 echo "Creando tags y subiendo a GCR..."
@@ -41,13 +41,13 @@ for tag in "${tags[@]}"; do
     fi
 
     gcr_tag="$gcp_repo/$gcp_project_id/$image_name:$tag"
-    sudo docker tag "$image_name:$tag" "$gcr_tag"
-    sudo docker push "$gcr_tag"
+    docker tag "$image_name:$tag" "$gcr_tag"
+    docker push "$gcr_tag"
 done
 
 # === LIMPIEZA ===
 echo "Limpiando imágenes intermedias..."
-sudo docker image prune -f
+docker image prune -f
 
 echo "Completado. Imágenes disponibles en GCR:"
 for tag in "${tags[@]}"; do
