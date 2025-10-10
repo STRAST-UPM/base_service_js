@@ -66,9 +66,7 @@ echo "Backend services deletion complete."
 # 6. Delete Network Endpoint Groups (NEGs)
 # ========================
 echo "Deleting Network Endpoint Groups (NEGs)..."
-# We use a while read loop to handle names with spaces (if any)
 while IFS=$'\t' read -r name region_url; do
-    # If the line is empty, continue
     [ -z "$name" ] && continue
     region=$(basename "$region_url")
     echo "Deleting NEG: $name ($region)"
@@ -76,7 +74,6 @@ while IFS=$'\t' read -r name region_url; do
     echo "NEG $name deleted"
 done < <(gcloud compute network-endpoint-groups list --format="value(name,region)" | grep "$PREFIX")
 echo "NEGs deletion complete."
-
 
 # ========================
 # 7. Delete Cloud Run services
@@ -88,5 +85,51 @@ for service in $(gcloud run services list --platform=managed --format="value(nam
     echo "Service $service deleted"
 done
 echo "Cloud Run services deletion complete."
+
+# ========================
+# 8. Delete firewall rules
+# ========================
+echo "Deleting firewall rules..."
+for fw in $(gcloud compute firewall-rules list --format="value(name)" | grep "$PREFIX"); do
+    echo "Deleting firewall rule: $fw"
+    gcloud compute firewall-rules delete "$fw" --quiet || true
+    echo "Firewall rule $fw deleted"
+done
+echo "Firewall rules deletion complete."
+
+# ========================
+# 9. Delete subnetworks
+# ========================
+echo "Deleting subnetworks..."
+while IFS=$'\t' read -r name region_url; do
+    [ -z "$name" ] && continue
+    region=$(basename "$region_url")
+    echo "Deleting subnetwork: $name ($region)"
+    gcloud compute networks subnets delete "$name" --region="$region" --quiet || true
+    echo "Subnetwork $name deleted"
+done < <(gcloud compute networks subnets list --format="value(name,region)" | grep "$PREFIX")
+echo "Subnetworks deletion complete."
+
+# ========================
+# 10. Delete routes
+# ========================
+echo "Deleting routes..."
+for route in $(gcloud compute routes list --format="value(name)" | grep "$PREFIX"); do
+    echo "Deleting route: $route"
+    gcloud compute routes delete "$route" --quiet || true
+    echo "Route $route deleted"
+done
+echo "Routes deletion complete."
+
+# ========================
+# 11. Delete networks
+# ========================
+echo "Deleting networks..."
+for net in $(gcloud compute networks list --format="value(name)" | grep "$PREFIX"); do
+    echo "Deleting network: $net"
+    gcloud compute networks delete "$net" --quiet || true
+    echo "Network $net deleted"
+done
+echo "Networks deletion complete."
 
 echo "Cleanup complete."
