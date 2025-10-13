@@ -79,57 +79,6 @@ echo "Active project: $PROJECT_ID"
 echo "=============================="
 
 #====================================
-# Deploy Cloud Run services in specified regions
-#====================================
-IMAGE="gcr.io/$PROJECT_ID/base_service_js:latest"
-
-MAX_RETRIES=3  # maximum number of retries per service
-BASE_WAIT=60   # seconds to wait between retries
-EXTRA_WAIT=30  # extra wait time added to BASE_WAIT on retries
-
-for domain in "${!DOMAINS[@]}"; do
-    regions=(${DOMAINS[$domain]})
-    for region in "${regions[@]}"; do
-        service_name="${region}-service"
-        echo "Deploying Cloud Run service $service_name in $region..."
-
-        attempt=1
-        success=false
-
-        while [ $attempt -le $MAX_RETRIES ]; do
-            echo "Attempt $attempt of $MAX_RETRIES for $service_name..."
-
-            if gcloud run deploy "$service_name" \
-                --image="$IMAGE" \
-                --region="$region" \
-                --allow-unauthenticated \
-                --platform=managed \
-                --project="$PROJECT_ID" \
-                --set-env-vars="REGION=$region"; then
-                success=true
-                break
-            else
-                echo "Deployment failed for $service_name (attempt $attempt)."
-                if [ $attempt -lt $MAX_RETRIES ]; then
-                    wait_time=$((BASE_WAIT + EXTRA_WAIT))
-                    echo "Retrying after $wait_time seconds..."
-                    sleep $wait_time
-                fi
-            fi
-            ((attempt++))
-        done
-
-        if [ "$success" = true ]; then
-            echo "Service $service_name deployed successfully. Waiting $BASE_WAIT seconds to ensure readiness..."
-            sleep $BASE_WAIT
-        else
-            echo "Failed to deploy $service_name after $MAX_RETRIES attempts."
-        fi
-    done
-done
-
-
-#====================================
 # Create Network Endpoint Groups (NEGs) for each Cloud Run service
 #====================================
 
