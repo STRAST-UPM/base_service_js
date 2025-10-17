@@ -16,7 +16,7 @@ echo "Active project: $PROJECT_ID"
 echo "=============================="
 
 REGIONS=(
-africa-south1
+africa-south1 # Johannesburgo
 asia-east1
 asia-east2
 asia-northeast1
@@ -28,36 +28,52 @@ asia-southeast1
 asia-southeast2
 australia-southeast1
 australia-southeast2
-europe-central2
-europe-north1
-europe-north2
-europe-southwest1
-europe-west1
-europe-west10
-europe-west12
-europe-west2
-europe-west3
-europe-west4
-europe-west6
-europe-west8
-europe-west9
-me-central1
-me-central2
-me-west1
-northamerica-northeast1
-northamerica-northeast2
-northamerica-south1
-southamerica-east1
-southamerica-west1
-us-central1
-us-east1
-us-east4
-us-east5
-us-south1
-us-west1
-us-west2
-us-west3
-us-west4
+europe-central2 # Varsovia
+europe-north1 # Finlandia
+europe-north2 # Estocolmo
+europe-southwest1 # Madrid
+europe-west1 # Bélgica
+europe-west2 # Londres
+europe-west3 # Frankfurt
+europe-west4 # Países Bajos
+europe-west6 # Zurich
+europe-west8 # Milán
+europe-west9 # París
+europe-west10 # Berlín
+europe-west12 # Turín
+me-central1 # Dubai
+me-central2 # Dubai
+me-west1 # Dubai
+northamerica-northeast1 # Toronto
+northamerica-northeast2 # Montreal
+northamerica-south1 # São Paulo
+southamerica-east1 # Buenos Aires
+southamerica-west1 # Santiago
+us-central1 # Iowa
+us-east1 # Virginia
+us-east4 # Ohio
+us-east5 # Washington
+us-south1 # Dallas
+us-west1 # Oregón
+us-west2 # California
+us-west3 # Nevada
+us-west4 # Washington
+)
+
+REGIONS=(
+europe-central2 # Varsovia
+europe-north1 # Finlandia
+# europe-north2 # Estocolmo
+europe-southwest1 # Madrid
+# europe-west1 # Bélgica
+europe-west2 # Londres
+# europe-west3 # Frankfurt
+# europe-west4 # Países Bajos
+# europe-west6 # Zurich
+# europe-west8 # Milán
+europe-west9 # París
+# europe-west10 # Berlín
+# europe-west12 # Turín
 )
 
 #====================================
