@@ -17,33 +17,6 @@ echo "=============================="
 
 REGIONS=(
 africa-south1 # Johannesburgo
-asia-east1
-asia-east2
-asia-northeast1
-asia-northeast2
-asia-northeast3
-asia-south1
-asia-south2
-asia-southeast1
-asia-southeast2
-australia-southeast1
-australia-southeast2
-europe-central2 # Varsovia
-europe-north1 # Finlandia
-europe-north2 # Estocolmo
-europe-southwest1 # Madrid
-europe-west1 # Bélgica
-europe-west2 # Londres
-europe-west3 # Frankfurt
-europe-west4 # Países Bajos
-europe-west6 # Zurich
-europe-west8 # Milán
-europe-west9 # París
-europe-west10 # Berlín
-europe-west12 # Turín
-me-central1 # Dubai
-me-central2 # Dubai
-me-west1 # Dubai
 northamerica-northeast1 # Toronto
 northamerica-northeast2 # Montreal
 northamerica-south1 # São Paulo
@@ -58,6 +31,33 @@ us-west1 # Oregón
 us-west2 # California
 us-west3 # Nevada
 us-west4 # Washington
+asia-east1 # Taiwán
+asia-east2 # Hong Kong
+asia-northeast1 # Tokio
+asia-northeast2 # Osaka
+asia-northeast3 # Seúl
+asia-south1 # Bombai
+asia-south2 # Delhi
+asia-southeast1 # Singapur
+asia-southeast2 # Yakarta
+australia-southeast1 # Sídney
+australia-southeast2 # Melbourne
+europe-central2 # Varsovia
+europe-north1 # Finlandia
+europe-north2 # Estocolmo
+europe-southwest1 # Madrid
+europe-west1 # Bélgica
+europe-west2 # Londres
+europe-west3 # Frankfurt
+europe-west4 # Países Bajos
+europe-west6 # Zurich
+europe-west8 # Milán
+europe-west9 # París
+europe-west10 # Berlín
+europe-west12 # Turín
+me-central1 # Doha
+me-central2 # Dammam
+me-west1 # Tel Aviv
 )
 
 REGIONS=(

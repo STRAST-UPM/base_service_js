@@ -12,65 +12,71 @@ if [ -z "$PROJECT_ID" ]; then
     exit 1
 fi
 
+
+# List of all possible regions
+################################################################################
+# africa-south1 # Johannesburgo
+# northamerica-northeast1 # Toronto
+# northamerica-northeast2 # Montreal
+# northamerica-south1 # São Paulo
+# southamerica-east1 # Buenos Aires
+# southamerica-west1 # Santiago
+# us-central1 # Iowa
+# us-east1 # Virginia
+# us-east4 # Ohio
+# us-east5 # Washington
+# us-south1 # Dallas
+# us-west1 # Oregón
+# us-west2 # California
+# us-west3 # Nevada
+# us-west4 # Washington
+# asia-east1 # Taiwán
+# asia-east2 # Hong Kong
+# asia-northeast1 # Tokio
+# asia-northeast2 # Osaka
+# asia-northeast3 # Seúl
+# asia-south1 # Bombai
+# asia-south2 # Delhi
+# asia-southeast1 # Singapur
+# asia-southeast2 # Yakarta
+# australia-southeast1 # Sídney
+# australia-southeast2 # Melbourne
+# europe-central2 # Varsovia
+# europe-north1 # Finlandia
+# europe-north2 # Estocolmo
+# europe-southwest1 # Madrid
+# europe-west1 # Bélgica
+# europe-west2 # Londres
+# europe-west3 # Frankfurt
+# europe-west4 # Países Bajos
+# europe-west6 # Zurich
+# europe-west8 # Milán
+# europe-west9 # París
+# europe-west10 # Berlín
+# europe-west12 # Turín
+# me-central1 # Doha
+# me-central2 # Dammam
+# me-west1 # Tel Aviv
+################################################################################
+
 # Define domains and regions associated
 declare -A DOMAINS
 # Only the ones in the EEA
 DOMAINS["europe.anycastprivacy.org"]="
 europe-central2
 europe-north1
-europe-north2
 europe-southwest1
-europe-west1
-europe-west10
-europe-west12
-europe-west3
-europe-west4
-europe-west8
-europe-west9"
+europe-west2
+europe-west9
+"
 
 DOMAINS["global.anycastprivacy.org"]="
-africa-south1
-asia-east1
-asia-east2
-asia-northeast1
-asia-northeast2
-asia-northeast3
-asia-south1
-asia-south2
-asia-southeast1
-asia-southeast2
-australia-southeast1
-australia-southeast2
 europe-central2
 europe-north1
-europe-north2
 europe-southwest1
-europe-west1
-europe-west10
-europe-west12
 europe-west2
-europe-west3
-europe-west4
-europe-west6
-europe-west8
 europe-west9
-me-central1
-me-central2
-me-west1
-northamerica-northeast1
-northamerica-northeast2
-northamerica-south1
-southamerica-east1
-southamerica-west1
-us-central1
-us-east1
-us-east4
-us-east5
-us-south1
-us-west1
-us-west2
-us-west3
-us-west4"
+"
 
 # Name prefix to avoid collisions between resources
 PREFIX="anycastprivacy"
