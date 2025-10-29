@@ -70,16 +70,16 @@ europe-west2
 europe-west9
 "
 
-DOMAINS["global.anycastprivacy.org"]="
-europe-central2
-europe-north1
-europe-southwest1
-europe-west2
-europe-west9
-"
+#DOMAINS["global.anycastprivacy.org"]="
+#europe-central2
+#europe-north1
+#europe-southwest1
+#europe-west2
+#europe-west9
+#"
 
 # Name prefix to avoid collisions between resources
-PREFIX="anycastprivacy"
+PREFIX="prod"
 
 echo "Active project: $PROJECT_ID"
 echo "=============================="
@@ -137,8 +137,10 @@ for domain in "${!DOMAINS[@]}"; do
     backend_name="${PREFIX}-backend-${domain//./-}"
     urlmap_name="${PREFIX}-urlmap-${domain//./-}"
     cert_name="${PREFIX}-cert-${domain//./-}"
-    proxy_name="${PREFIX}-proxy-${domain//./-}"
-    rule_name="${PREFIX}-rule-${domain//./-}"
+    https_proxy_name="${PREFIX}-https-proxy-${domain//./-}"
+    https_rule_name="${PREFIX}-https-rule-${domain//./-}"
+    http_proxy_name="${PREFIX}-http-proxy-${domain//./-}"
+    http_rule_name="${PREFIX}-http-rule-${domain//./-}"
 
     echo "Configuring domain: $domain"
 
@@ -155,19 +157,33 @@ for domain in "${!DOMAINS[@]}"; do
         --project="$PROJECT_ID" || echo "SSL certificate already $cert_name created"
 
     # HTTPS Proxy
-    echo "Creating HTTPS proxy $proxy_name"
-    gcloud compute target-https-proxies create "$proxy_name" \
+    echo "Creating HTTPS proxy $https_proxy_name"
+    gcloud compute target-https-proxies create "$https_proxy_name" \
         --url-map="$urlmap_name" \
         --ssl-certificates="$cert_name" \
-        --project="$PROJECT_ID" || echo "HTTPS proxy already $proxy_name created"
+        --project="$PROJECT_ID" || echo "HTTPS proxy already $https_proxy_name created"
 
-    # Forwarding Rule
-    echo "Creating forwarding rule $rule_name"
-    gcloud compute forwarding-rules create "$rule_name" \
+    # HTTPS Forwarding Rule
+    echo "Creating forwarding rule $https_rule_name"
+    gcloud compute forwarding-rules create "$https_rule_name" \
         --global \
-        --target-https-proxy="$proxy_name" \
+        --target-https-proxy="$https_proxy_name" \
         --ports=443 \
-        --project="$PROJECT_ID" || echo "Forwarding rule already $rule_name created"
+        --project="$PROJECT_ID" || echo "Forwarding rule already $https_rule_name created"
+
+    # HTTP Proxy
+    echo "Creating HTTP proxy $http_proxy_name"
+    gcloud compute target-http-proxies create "$http_proxy_name" \
+        --url-map="$urlmap_name" \
+        --project="$PROJECT_ID" || echo "HTTP proxy already $http_proxy_name created"
+
+    # HTTP Forwarding Rule
+    echo "Creating forwarding rule $http_rule_name"
+    gcloud compute forwarding-rules create "$http_rule_name" \
+        --global \
+        --target-http-proxy="$http_proxy_name" \
+        --ports=80 \
+        --project="$PROJECT_ID" || echo "Forwarding rule already $http_rule_name created"
 done
 
 # ===================================

@@ -2,7 +2,7 @@
 set -e
 
 PROJECT_ID=$(gcloud config get-value project 2>/dev/null)
-PREFIX="anycastprivacy"
+PREFIX="prod"
 
 echo "Cleaning resources in project: $PROJECT_ID"
 echo "====================================="
